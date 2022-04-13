@@ -28,10 +28,23 @@ public class Main {
                 .collect(Collectors.toList());
         System.out.println(a);
 
-        Stream<Person> stream3 = persons.stream();
-        List<Person> people = stream3.filter(person -> person.getEducation().equals(Education.HIGHER))
+        Stream<Person> maleStream = persons.stream();
+        List<Person> malepeople = maleStream.filter(person -> person.getEducation().equals(Education.HIGHER))
+                .filter(person -> person.getSex().equals(Sex.MAN))
+                .filter(person -> person.getAge() >= 18)
+                .filter(person -> person.getAge() <= 65)
                 .sorted(Comparator.comparing(person -> person.getFamily()))
                 .collect(Collectors.toList());
-        System.out.println(people);
+        System.out.println(malepeople);
+
+        Stream<Person> femailStream = persons.stream();
+        List<Person> female = femailStream
+                .filter(person -> person.getEducation().equals(Education.HIGHER))
+                .filter(person -> person.getSex().equals(Sex.WOMAN))
+                .filter(person -> person.getAge() >= 18)
+                .filter(person -> person.getAge() <= 60)
+                .sorted(Comparator.comparing(person -> person.getFamily()))
+                .collect(Collectors.toList());
+        System.out.println(female);
     }
 }
